@@ -51,6 +51,11 @@
 
 #include "PoseInfoContainer.h"
 
+#include <sensor_msgs/PointCloud.h>
+#include <sensor_msgs/PointCloud2.h>
+#include <sensor_msgs/point_cloud_conversion.h>
+
+
 
 class HectorDrawings;
 class HectorDebugInfoProvider;
@@ -73,6 +78,7 @@ public:
 
   void scanCallback(const sensor_msgs::LaserScan& scan);
   void sysMsgCallback(const std_msgs::String& string);
+  void pointCloud2Callback(const sensor_msgs::PointCloud2& scan);
 
   bool mapCallback(nav_msgs::GetMap::Request  &req, nav_msgs::GetMap::Response &res);
 
@@ -104,6 +110,7 @@ protected:
 
   ros::Subscriber scanSubscriber_;
   ros::Subscriber sysMsgSubscriber_;
+  ros::Subscriber pointCloud2Subscriber_;
 
   ros::Subscriber mapSubscriber_;
   message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped>* initial_pose_sub_;
@@ -154,6 +161,7 @@ protected:
 
   std::string p_scan_topic_;
   std::string p_sys_msg_topic_;
+  std::string p_PointCloud2_topic_;
 
   std::string p_pose_update_topic_;
   std::string p_twist_update_topic_;
